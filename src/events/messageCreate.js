@@ -70,7 +70,7 @@ async function handleKeyword(message) {
   // Mark before sending so a failed/slow upload cannot cause response bursts.
   markChannelCooldown(guildId, message.channel.id);
   await sendImage(message.channel, config.assets.adapt, 'adapt.png');
-  await message.channel.send('🛞 ガコンッ');
+  await message.reply('🛞 ガコンッ');
 }
 
 async function onMessageCreate(message) {

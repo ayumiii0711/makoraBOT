@@ -2,8 +2,14 @@ const { Client, GatewayIntentBits, Events } = require('discord.js');
 const config = require('./config');
 const { onMessageCreate } = require('./events/messageCreate');
 
-if (!config.token || config.token === 'YOUR_BOT_TOKEN_HERE') {
-  console.error('DISCORD_TOKEN is not set. Please update your .env file.');
+if (!config.token) {
+  const visibleTokenKeys = config.tokenEnvKeys.filter((key) => process.env[key]);
+  console.error(
+    `Discord token is not set. Add one Railway variable named ${config.tokenEnvKeys.join(' or ')}.`,
+  );
+  console.error(
+    `Visible token variable names: ${visibleTokenKeys.length > 0 ? visibleTokenKeys.join(', ') : 'none'}`,
+  );
   process.exit(1);
 }
 
